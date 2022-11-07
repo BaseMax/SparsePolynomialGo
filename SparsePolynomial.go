@@ -56,6 +56,63 @@ func (p *SparsePolynomial) String() string {
 	return result[:len(result)-3]
 }
 
+// + operator for sum two polynomial
+func (p *SparsePolynomial) Addition(p2 *SparsePolynomial) *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		result.Add(d, c)
+	}
+	for d, c := range p2.coefficients {
+		result.Add(d, c)
+	}
+	return result
+}
+
+// - operator for subtract two polynomial
+func (p *SparsePolynomial) Subtraction(p2 *SparsePolynomial) *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		result.Add(d, c)
+	}
+	for d, c := range p2.coefficients {
+		result.Add(d, c.Neg(c))
+	}
+	return result
+}
+
+// * operator for multiply two polynomial
+func (p *SparsePolynomial) Multiplication(p2 *SparsePolynomial) *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		for d2, c2 := range p2.coefficients {
+			result.Add(d+d2, c.Mul(c, c2))
+		}
+	}
+	return result
+}
+
+// / operator for divide two polynomial
+func (p *SparsePolynomial) Division(p2 *SparsePolynomial) *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		for d2, c2 := range p2.coefficients {
+			result.Add(d+d2, c.Mul(c, c2))
+		}
+	}
+	return result
+}
+
+// % operator for modulus two polynomial
+func (p *SparsePolynomial) Modulus(p2 *SparsePolynomial) *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		for d2, c2 := range p2.coefficients {
+			result.Add(d+d2, c.Mul(c, c2))
+		}
+	}
+	return result
+}
+
 // Main function
 func main() {
 	println("Hello, World!")
