@@ -96,7 +96,7 @@ func (p *SparsePolynomial) Division(p2 *SparsePolynomial) *SparsePolynomial {
 	result := NewSparsePolynomial()
 	for d, c := range p.coefficients {
 		for d2, c2 := range p2.coefficients {
-			result.Add(d+d2, c.Mul(c, c2))
+			result.Add(d-d2, c.Div(c, c2))
 		}
 	}
 	return result
@@ -107,7 +107,7 @@ func (p *SparsePolynomial) Modulus(p2 *SparsePolynomial) *SparsePolynomial {
 	result := NewSparsePolynomial()
 	for d, c := range p.coefficients {
 		for d2, c2 := range p2.coefficients {
-			result.Add(d+d2, c.Mul(c, c2))
+			result.Add(d%d2, c.Mod(c, c2))
 		}
 	}
 	return result
@@ -132,22 +132,24 @@ func (p *SparsePolynomial) Derivative() *SparsePolynomial {
 }
 
 // Calculate GCD of two polynomial
+// Greatest common divisor
 func (p *SparsePolynomial) GCD(p2 *SparsePolynomial) *SparsePolynomial {
 	result := NewSparsePolynomial()
 	for d, c := range p.coefficients {
 		for d2, c2 := range p2.coefficients {
-			result.Add(d+d2, c.Mul(c, c2))
+			result.Add(d%d2, c.Mod(c, c2))
 		}
 	}
 	return result
 }
 
 // Calculate LCM of two polynomial
+// LCM is the short form for “Least Common Multiple
 func (p *SparsePolynomial) LCM(p2 *SparsePolynomial) *SparsePolynomial {
 	result := NewSparsePolynomial()
 	for d, c := range p.coefficients {
 		for d2, c2 := range p2.coefficients {
-			result.Add(d+d2, c.Mul(c, c2))
+			result.Add(d%d2, c.Mod(c, c2))
 		}
 	}
 	return result
