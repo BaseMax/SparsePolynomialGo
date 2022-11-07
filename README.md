@@ -1,6 +1,6 @@
-# Sparse Polynomial
+# Sparse Polynomial (SparsePolynomial Go)
 
-A Go package for working with sparse polynomials.
+A Go-Language package for working with sparse polynomials.
 
 ## Features
 
