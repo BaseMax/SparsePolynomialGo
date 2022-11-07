@@ -60,12 +60,6 @@ func main() {
 	// Derivative
 	fmt.Println(p.Derivative())
 
-	// GCD
-	fmt.Println(p.GCD(p2))
-
-	// LCM
-	fmt.Println(p.LCM(p2))
-
 	// Inverse
 	fmt.Println(p.Inverse())
 }

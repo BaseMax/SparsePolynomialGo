@@ -131,30 +131,6 @@ func (p *SparsePolynomial) Derivative() *SparsePolynomial {
 	return result
 }
 
-// Calculate GCD of two polynomial
-// Greatest common divisor
-func (p *SparsePolynomial) GCD(p2 *SparsePolynomial) *SparsePolynomial {
-	result := NewSparsePolynomial()
-	for d, c := range p.coefficients {
-		for d2, c2 := range p2.coefficients {
-			result.Add(d%d2, c.Mod(c, c2))
-		}
-	}
-	return result
-}
-
-// Calculate LCM of two polynomial
-// LCM is the short form for “Least Common Multiple
-func (p *SparsePolynomial) LCM(p2 *SparsePolynomial) *SparsePolynomial {
-	result := NewSparsePolynomial()
-	for d, c := range p.coefficients {
-		for d2, c2 := range p2.coefficients {
-			result.Add(d%d2, c.Mod(c, c2))
-		}
-	}
-	return result
-}
-
 // Calculate Inverse of polynomial
 func (p *SparsePolynomial) Inverse() *SparsePolynomial {
 	result := NewSparsePolynomial()
