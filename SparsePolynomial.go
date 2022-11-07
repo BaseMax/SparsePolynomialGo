@@ -113,6 +113,24 @@ func (p *SparsePolynomial) Modulus(p2 *SparsePolynomial) *SparsePolynomial {
 	return result
 }
 
+// Calculate integral of polynomial
+func (p *SparsePolynomial) Integral() *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		result.Add(d+1, c.Div(c, big.NewInt(int64(d+1))))
+	}
+	return result
+}
+
+// Calculate derivative of polynomial
+func (p *SparsePolynomial) Derivative() *SparsePolynomial {
+	result := NewSparsePolynomial()
+	for d, c := range p.coefficients {
+		result.Add(d-1, c.Mul(c, big.NewInt(int64(d))))
+	}
+	return result
+}
+
 // Main function
 func main() {
 	println("Hello, World!")
